@@ -71,6 +71,11 @@ target_link_libraries(Reflex PRIVATE ReflexLibStatic)
 target_compile_definitions(Reflex PRIVATE ${simd_definitions})
 target_compile_options(Reflex PRIVATE ${simd_flags})
 
+if (MINGW AND WIN32)
+    target_link_libraries(ReflexLib PRIVATE ws2_32)
+    target_link_libraries(ReflexLibStatic PRIVATE ws2_32)
+endif ()
+
 # Don't user target name as filename instead use lowercase name for backwards compatibility
 set_target_properties(ReflexLibStatic PROPERTIES OUTPUT_NAME reflex_static_lib)
 set_target_properties(ReflexLib PROPERTIES OUTPUT_NAME reflex_shared_lib)

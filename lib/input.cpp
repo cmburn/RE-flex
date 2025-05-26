@@ -39,7 +39,10 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
-#if (defined(__WIN32__) || defined(_WIN32) || defined(WIN32) || defined(_WIN64) || defined(__BORLANDC__)) && !defined(__CYGWIN__) && !defined(__MINGW32__) && !defined(__MINGW64__)
+#if (defined(__WIN32__) || defined(_WIN32) || defined(WIN32) || defined(_WIN64)) && (defined(__MINGW32__) || defined(__MINGW64__)) && defined(_UCRT)
+#include <unistd.h>
+#include <winsock2.h>
+#elif (defined(__WIN32__) || defined(_WIN32) || defined(WIN32) || defined(_WIN64) || defined(__BORLANDC__)) && !defined(__CYGWIN__) && !defined(__MINGW32__) && !defined(__MINGW64__)
 # include <io.h>
 # include <fcntl.h>
 # define off_t __int64
